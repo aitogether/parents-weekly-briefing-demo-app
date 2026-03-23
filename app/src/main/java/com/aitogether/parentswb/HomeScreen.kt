@@ -2,6 +2,8 @@ package com.aitogether.parentswb
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +17,8 @@ import androidx.compose.ui.unit.sp
 fun HomeScreen(
     onReportClick: () -> Unit,
     onMomMedClick: () -> Unit,
-    onDadMedClick: () -> Unit
+    onDadMedClick: () -> Unit,
+    onAddPlanClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -49,6 +52,7 @@ fun HomeScreen(
             MenuButton(
                 text = "📋 子女端 · 本周黄灯周报",
                 description = "查看本周异常摘要与回声",
+                icon = Icons.Filled.Assessment,
                 color = WarmAmber,
                 onClick = onReportClick
             )
@@ -56,6 +60,7 @@ fun HomeScreen(
             MenuButton(
                 text = "💊 妈妈 · 用药确认",
                 description = "看到子女的一句话",
+                icon = Icons.Filled.Favorite,
                 color = WarmGreen,
                 onClick = onMomMedClick
             )
@@ -63,8 +68,17 @@ fun HomeScreen(
             MenuButton(
                 text = "💚 爸爸 · 用药确认",
                 description = "暂未收到回声",
+                icon = Icons.Filled.MedicalServices,
                 color = WarmBlue,
                 onClick = onDadMedClick
+            )
+
+            MenuButton(
+                text = "📝 子女端 · 添加用药计划",
+                description = "演示为父母设定用药计划",
+                icon = Icons.Filled.NoteAdd,
+                color = androidx.compose.ui.graphics.Color(0xFF8B5CF6),
+                onClick = onAddPlanClick
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -82,6 +96,7 @@ fun HomeScreen(
 private fun MenuButton(
     text: String,
     description: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
     color: androidx.compose.ui.graphics.Color,
     onClick: () -> Unit
 ) {
@@ -100,13 +115,20 @@ private fun MenuButton(
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 18.dp)
         ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(28.dp),
+                tint = White
+            )
+            Spacer(modifier = Modifier.width(12.dp))
             Column(
                 horizontalAlignment = Alignment.Start,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = text,
-                    fontSize = 18.sp,
+                    fontSize = 17.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = White
                 )

@@ -7,13 +7,15 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -108,16 +110,25 @@ fun ReportScreen(onBack: () -> Unit) {
                     Spacer(modifier = Modifier.height(12.dp))
 
                     val facts = listOf(
-                        "妈本周 7 天里有 2 天没按时吃降压药（完成率 71%）。",
-                        "妈周三步数只有 890 步，比平时低很多。",
-                        "爸有 5 天步数低于 800 步，周六 3,280 步出门了一次。"
+                        Triple(Icons.Filled.MedicalServices, Color(0xFFEF4444),
+                            "妈本周 7 天里有 2 天没按时吃降压药（完成率 71%）。"),
+                        Triple(Icons.Filled.DirectionsWalk, Color(0xFFF59E0B),
+                            "妈周三步数只有 890 步，比平时低很多。"),
+                        Triple(Icons.Filled.DirectionsWalk, Color(0xFF3B82F6),
+                            "爸有 5 天步数低于 800 步，周六 3,280 步出门了一次。")
                     )
-                    facts.forEach { fact ->
+                    facts.forEach { (icon, iconColor, fact) ->
                         Row(
                             modifier = Modifier.padding(vertical = 6.dp),
                             verticalAlignment = Alignment.Top
                         ) {
-                            Text("• ", color = WarmAmber, fontWeight = FontWeight.Bold)
+                            Icon(
+                                imageVector = icon,
+                                contentDescription = null,
+                                tint = iconColor,
+                                modifier = Modifier.size(18.dp).padding(top = 2.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text(fact, fontSize = 14.sp, color = DarkGray, lineHeight = 22.sp)
                         }
                     }

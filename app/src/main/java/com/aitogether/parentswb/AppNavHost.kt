@@ -10,6 +10,7 @@ sealed class Screen(val route: String) {
     object Report : Screen("report")
     object MedicationMom : Screen("medication/mom")
     object MedicationDad : Screen("medication/dad")
+    object MedicationPlan : Screen("medication/plan")
 }
 
 @Composable
@@ -20,7 +21,8 @@ fun AppNavHost() {
             HomeScreen(
                 onReportClick = { navController.navigate(Screen.Report.route) },
                 onMomMedClick = { navController.navigate(Screen.MedicationMom.route) },
-                onDadMedClick = { navController.navigate(Screen.MedicationDad.route) }
+                onDadMedClick = { navController.navigate(Screen.MedicationDad.route) },
+                onAddPlanClick = { navController.navigate(Screen.MedicationPlan.route) }
             )
         }
         composable(Screen.Report.route) {
@@ -47,6 +49,9 @@ fun AppNavHost() {
                 echoText = "",
                 onBack = { navController.popBackStack() }
             )
+        }
+        composable(Screen.MedicationPlan.route) {
+            MedicationPlanScreen(onBack = { navController.popBackStack() })
         }
     }
 }
