@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+color amber_light
+color dark_gray
+color light_gray
+color medium_gray
+color warm_amber
+color warm_blue
+color warm_green
+color white
+string app_name
+style Theme.ParentsWB

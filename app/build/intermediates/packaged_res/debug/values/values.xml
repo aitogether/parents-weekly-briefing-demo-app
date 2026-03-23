@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="amber_light">#FFFBEB</color>
+    <color name="dark_gray">#374151</color>
+    <color name="light_gray">#F9FAFB</color>
+    <color name="medium_gray">#6B7280</color>
+    <color name="warm_amber">#F59E0B</color>
+    <color name="warm_blue">#3B82F6</color>
+    <color name="warm_green">#22C55E</color>
+    <color name="white">#FFFFFF</color>
+    <string name="app_name">父母周报</string>
+    <style name="Theme.ParentsWB" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/warm_amber</item>
+    </style>
+</resources>
