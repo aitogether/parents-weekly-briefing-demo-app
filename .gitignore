@@ -1,1 +1,10 @@
 *.apk
+.gradle/
+build/
+.gradle/
+local.properties
+*.iml
+.idea/
+.gradle/caches/
+.gradle/daemon/
+.gradle/wrapper/dists/
