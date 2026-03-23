@@ -2,6 +2,22 @@
 
 父母周报 Demo App
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="docs/media/screenshots/ic_launcher.png" alt="App Icon" width="72"/>
+</p>
+
+> 📷 Android 真机截图待补充。以下是 3 个核心页面的功能说明：
+>
+> | 页面 | 功能 |
+> |------|------|
+> | 🏠 主页 | 四个大按钮入口 |
+> | 📋 黄灯周报 | 子女端：状态灯 + 事实 + 建议 + 回声选项 |
+> | 💊 用药确认 | 大按钮 + 子女回声卡片 |
+
+**安装 APK 即可体验全部页面** → [Releases](https://github.com/aitogether/parents-weekly-briefing-demo-app/releases)
+
 ## 项目简介 / Project Overview
 
 **中文：** 父母周报 Demo App 是一个独立的 Android 演示应用，用来展示"父母周报"的核心体验：子女每周黄灯周报、爸妈用药确认、大按钮 + 回声卡片。所有数据均为假数据，不联网。
