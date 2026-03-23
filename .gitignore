@@ -8,3 +8,4 @@ local.properties
 .gradle/caches/
 .gradle/daemon/
 .gradle/wrapper/dists/
+.DS_Store
