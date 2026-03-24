@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shield
-import androidx.compose.material.Divider
 import androidx.compose.material3.*
+import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -87,7 +87,7 @@ fun PrivacyDialog(onDismiss: () -> Unit) {
                     color = DarkGray
                 )
 
-                Divider(
+                HorizontalDivider(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 color = Color(0xFFE5E7EB)
             )
