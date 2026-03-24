@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -87,10 +88,13 @@ fun PrivacyDialog(onDismiss: () -> Unit) {
                     color = DarkGray
                 )
 
-                HorizontalDivider(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = Color(0xFFE5E7EB)
-            )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .height(1.dp)
+                        .background(Color(0xFFE5E7EB))
+                )
 
                 Text(
                     text = "本演示 App 仅用于展示「父母周报」的产品形态，所有数据均为虚构示例。\n\n本 App 不会采集、存储或上传任何真实个人信息、健康数据或位置信息。",
