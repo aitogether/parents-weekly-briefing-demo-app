@@ -26,7 +26,7 @@ fun HomeScreen(
             TopAppBar(
                 title = { Text("父母周报 · 演示版", fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = WarmAmber,
+                    containerColor = BrandTeal,
                     titleContentColor = White
                 )
             )
@@ -54,7 +54,7 @@ fun HomeScreen(
                 text = "📋 子女端 · 本周黄灯周报",
                 description = "查看本周异常摘要与回声",
                 icon = Icons.Filled.Assessment,
-                color = WarmAmber,
+                color = BrandTeal,
                 onClick = onReportClick
             )
 

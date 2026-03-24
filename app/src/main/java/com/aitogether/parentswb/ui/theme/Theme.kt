@@ -12,10 +12,10 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = WarmAmber,
-    primaryContainer = AmberLight,
-    secondary = WarmGreen,
-    secondaryContainer = GreenLight,
+    primary = BrandTeal,
+    primaryContainer = BrandTealLight,
+    secondary = BrandMint,
+    secondaryContainer = BrandMintLight,
     tertiary = WarmBlue,
     tertiaryContainer = EchoBackground,
     background = White,
@@ -30,8 +30,8 @@ private val LightColorScheme = lightColorScheme(
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = WarmAmber,
-    secondary = WarmGreen,
+    primary = BrandTeal,
+    secondary = BrandMint,
     tertiary = WarmBlue
 )
 
@@ -47,7 +47,7 @@ fun ParentsWBTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = WarmAmber.toArgb()
+            window.statusBarColor = BrandTeal.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
         }
     }

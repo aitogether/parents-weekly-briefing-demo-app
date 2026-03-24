@@ -77,7 +77,7 @@ fun PrivacyDialog(onDismiss: () -> Unit) {
                 Icon(
                     Icons.Filled.Shield,
                     contentDescription = null,
-                    tint = WarmAmber,
+                    tint = BrandTeal,
                     modifier = Modifier.size(48.dp)
                 )
 
@@ -109,7 +109,7 @@ fun PrivacyDialog(onDismiss: () -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = WarmAmber),
+                    colors = ButtonDefaults.buttonColors(containerColor = BrandTeal),
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(

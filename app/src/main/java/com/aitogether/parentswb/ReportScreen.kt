@@ -35,7 +35,7 @@ fun ReportScreen(onBack: () -> Unit) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = WarmAmber,
+                    containerColor = BrandTeal,
                     titleContentColor = White,
                     navigationIconContentColor = White
                 )
@@ -54,7 +54,7 @@ fun ReportScreen(onBack: () -> Unit) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = AmberLight),
+                colors = CardDefaults.cardColors(containerColor = BrandTealLight),
                 border = ButtonDefaults.outlinedButtonBorder
             ) {
                 Row(
@@ -65,7 +65,7 @@ fun ReportScreen(onBack: () -> Unit) {
                         modifier = Modifier
                             .size(20.dp)
                             .clip(CircleShape)
-                            .background(WarmAmber)
+                            .background(BrandTeal)
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
@@ -104,7 +104,7 @@ fun ReportScreen(onBack: () -> Unit) {
                     val facts = listOf(
                         Triple(Icons.Filled.MedicalServices, DangerRed,
                             "妈本周 7 天里有 2 天没按时吃降压药（完成率 71%）。"),
-                        Triple(Icons.Filled.DirectionsWalk, WarmAmber,
+                        Triple(Icons.Filled.DirectionsWalk, BrandTeal,
                             "妈周三步数只有 890 步，比平时低很多。"),
                         Triple(Icons.Filled.DirectionsWalk, WarmBlue,
                             "爸有 5 天步数低于 800 步，周六 3,280 步出门了一次。")
@@ -178,7 +178,7 @@ fun ReportScreen(onBack: () -> Unit) {
                                 .padding(vertical = 4.dp),
                             shape = RoundedCornerShape(12.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = if (isSelected) WarmAmber.copy(alpha = 0.15f) else White
+                                containerColor = if (isSelected) BrandTeal.copy(alpha = 0.15f) else White
                             ),
                             border = if (isSelected) ButtonDefaults.outlinedButtonBorder else null,
                             onClick = { selectedEcho = key }
@@ -193,13 +193,13 @@ fun ReportScreen(onBack: () -> Unit) {
                                     modifier = Modifier
                                         .size(20.dp)
                                         .clip(CircleShape)
-                                        .background(if (isSelected) WarmAmber else CardBorder)
+                                        .background(if (isSelected) BrandTeal else CardBorder)
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
                                     text,
                                     fontSize = 13.sp,
-                                    color = if (isSelected) WarmAmber else DarkGray,
+                                    color = if (isSelected) BrandTeal else DarkGray,
                                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
                                     lineHeight = 20.sp
                                 )
