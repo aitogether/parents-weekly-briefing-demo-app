@@ -8,49 +8,46 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFFF59E0B),
-    secondary = Color(0xFF22C55E),
-    tertiary = Color(0xFF3B82F6)
+private val LightColorScheme = lightColorScheme(
+    primary = WarmAmber,
+    primaryContainer = AmberLight,
+    secondary = WarmGreen,
+    secondaryContainer = GreenLight,
+    tertiary = WarmBlue,
+    tertiaryContainer = EchoBackground,
+    background = White,
+    surface = White,
+    onPrimary = White,
+    onSecondary = White,
+    onTertiary = White,
+    onBackground = DarkGray,
+    onSurface = DarkGray,
+    error = DangerRed,
+    outline = CardBorder
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFFF59E0B),
-    secondary = Color(0xFF22C55E),
-    tertiary = Color(0xFF3B82F6),
-    background = Color(0xFFFFFFFF),
-    surface = Color(0xFFFFFFFF),
-    onPrimary = Color(0xFFFFFFFF),
-    onSecondary = Color(0xFFFFFFFF),
-    onTertiary = Color(0xFFFFFFFF),
-    onBackground = Color(0xFF374151),
-    onSurface = Color(0xFF374151)
+private val DarkColorScheme = darkColorScheme(
+    primary = WarmAmber,
+    secondary = WarmGreen,
+    tertiary = WarmBlue
 )
 
 @Composable
 fun ParentsWBTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+    // 始终使用品牌色，不跟随系统动态颜色
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = Color(0xFFF59E0B).toArgb()
+            window.statusBarColor = WarmAmber.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
         }
     }

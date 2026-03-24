@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 品牌主色 -->
     <color name="warm_amber">#F59E0B</color>
     <color name="amber_light">#FFFBEB</color>
+    <!-- 功能色 -->
     <color name="warm_green">#22C55E</color>
     <color name="warm_blue">#3B82F6</color>
+    <color name="purple_600">#8B5CF6</color>
+    <!-- 中性色 -->
     <color name="white">#FFFFFF</color>
     <color name="dark_gray">#374151</color>
     <color name="medium_gray">#6B7280</color>
     <color name="light_gray">#F9FAFB</color>
-    <color name="ic_launcher_background">#22C55E</color>
+    <color name="card_border">#E5E7EB</color>
+    <!-- 场景色 -->
+    <color name="echo_background">#F0F9FF</color>
+    <color name="action_yellow">#FEF3C7</color>
+    <color name="danger_red">#EF4444</color>
+    <!-- 图标背景 -->
+    <color name="ic_launcher_background">#F59E0B</color>
 </resources>

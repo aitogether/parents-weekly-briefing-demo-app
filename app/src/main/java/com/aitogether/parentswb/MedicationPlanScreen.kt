@@ -16,11 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-private val Purple600 = Color(0xFF8B5CF6)
-private val WarmAmber = Color(0xFFF59E0B)
-private val BG = Color(0xFFF5F0EB)
-private val DarkGray = Color(0xFF4B5563)
+import com.aitogether.parentswb.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +50,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BG)
+                .background(LightGray)
                 .padding(padding)
                 .padding(horizontal = 20.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -74,7 +70,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                     Button(
                         onClick = { selectedParent = parent },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = if (selectedParent == parent) Purple600 else Color(0xFFE5E7EB)
+                            containerColor = if (selectedParent == parent) Purple600 else CardBorder
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
@@ -104,7 +100,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                     Button(
                         onClick = { frequency = freq },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = if (frequency == freq) Purple600 else Color(0xFFE5E7EB)
+                            containerColor = if (frequency == freq) Purple600 else CardBorder
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
@@ -147,7 +143,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
             // Toast 提示
             if (showToast) {
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F9FF)),
+                    colors = CardDefaults.cardColors(containerColor = EchoBackground),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -179,7 +175,7 @@ private fun TimeChip(label: String, selected: Boolean, onToggle: (Boolean) -> Un
     Button(
         onClick = { onToggle(!selected) },
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (selected) Purple600 else Color(0xFFE5E7EB)
+            containerColor = if (selected) Purple600 else CardBorder
         ),
         shape = RoundedCornerShape(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
@@ -230,13 +226,13 @@ private fun PlanPreview(parent: String, med: String, morning: Boolean, noon: Boo
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         times.forEach { time ->
                             Surface(
-                                color = Color(0xFFF0F9FF),
+                                color = EchoBackground,
                                 shape = RoundedCornerShape(6.dp)
                             ) {
                                 Text(
                                     "$time · $med",
                                     fontSize = 12.sp,
-                                    color = Color(0xFF1E40AF),
+                                    color = WarmBlue,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }
@@ -249,7 +245,7 @@ private fun PlanPreview(parent: String, med: String, morning: Boolean, noon: Boo
             Text(
                 text = "本页面仅用于展示用药计划添加流程，所有数据不会被保存或上传。",
                 fontSize = 11.sp,
-                color = Color(0xFF9CA3AF)
+                color = MediumGray
             )
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aitogether.parentswb.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +78,7 @@ fun HomeScreen(
                 text = "📝 子女端 · 添加用药计划",
                 description = "演示为父母设定用药计划",
                 icon = Icons.Filled.NoteAdd,
-                color = androidx.compose.ui.graphics.Color(0xFF8B5CF6),
+                color = Purple600,
                 onClick = onAddPlanClick
             )
 
@@ -86,7 +87,7 @@ fun HomeScreen(
             Text(
                 text = "v1.0 · ParentsWeeklyBriefing",
                 fontSize = 12.sp,
-                color = LightGray
+                color = MediumGray
             )
         }
     }
@@ -142,10 +143,3 @@ private fun MenuButton(
         }
     }
 }
-
-private val WarmAmber = androidx.compose.ui.graphics.Color(0xFFF59E0B)
-private val WarmGreen = androidx.compose.ui.graphics.Color(0xFF22C55E)
-private val WarmBlue = androidx.compose.ui.graphics.Color(0xFF3B82F6)
-private val White = androidx.compose.ui.graphics.Color.White
-private val DarkGray = androidx.compose.ui.graphics.Color(0xFF4B5563)
-private val LightGray = androidx.compose.ui.graphics.Color(0xFF9CA3AF)

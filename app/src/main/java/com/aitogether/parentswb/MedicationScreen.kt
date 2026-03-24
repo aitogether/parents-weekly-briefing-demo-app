@@ -16,15 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-private val WarmGreen = Color(0xFF22C55E)
-private val GreenLight = Color(0xFFF0FDF4)
-private val WarmAmber = Color(0xFFF59E0B)
-private val White = Color.White
-private val DarkGray = Color(0xFF374151)
-private val MediumGray = Color(0xFF6B7280)
-private val LightGray = Color(0xFFF9FAFB)
-private val EchoBackground = Color(0xFFF0F9FF)
+import com.aitogether.parentswb.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -156,5 +148,3 @@ fun MedicationScreen(
         }
     }
 }
-
-private val WarmBlue = Color(0xFF3B82F6)

@@ -15,18 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-private val WarmAmber = Color(0xFFF59E0B)
-private val AmberLight = Color(0xFFFFFBEB)
-private val White = Color.White
-private val DarkGray = Color(0xFF374151)
-private val MediumGray = Color(0xFF6B7280)
-private val LightGray = Color(0xFFF3F4F6)
-private val CardBorder = Color(0xFFE5E7EB)
+import com.aitogether.parentswb.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +31,7 @@ fun ReportScreen(onBack: () -> Unit) {
                 title = { Text("子女端 · 本周黄灯周报", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -110,11 +102,11 @@ fun ReportScreen(onBack: () -> Unit) {
                     Spacer(modifier = Modifier.height(12.dp))
 
                     val facts = listOf(
-                        Triple(Icons.Filled.MedicalServices, Color(0xFFEF4444),
+                        Triple(Icons.Filled.MedicalServices, DangerRed,
                             "妈本周 7 天里有 2 天没按时吃降压药（完成率 71%）。"),
-                        Triple(Icons.Filled.DirectionsWalk, Color(0xFFF59E0B),
+                        Triple(Icons.Filled.DirectionsWalk, WarmAmber,
                             "妈周三步数只有 890 步，比平时低很多。"),
-                        Triple(Icons.Filled.DirectionsWalk, Color(0xFF3B82F6),
+                        Triple(Icons.Filled.DirectionsWalk, WarmBlue,
                             "爸有 5 天步数低于 800 步，周六 3,280 步出门了一次。")
                     )
                     facts.forEach { (icon, iconColor, fact) ->
@@ -139,7 +131,7 @@ fun ReportScreen(onBack: () -> Unit) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFFEF3C7)),
+                colors = CardDefaults.cardColors(containerColor = ActionYellow),
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
