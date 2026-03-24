@@ -16,19 +16,17 @@
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>主页</b></td>
       <td align="center"><b>黄灯周报</b></td>
-      <td align="center"><b>用药确认</b></td>
+      <td align="center"><b>用药管理</b></td>
     </tr>
     <tr>
-      <td><img src="docs/media/screenshots/screenshot-home.png" width="220"/></td>
-      <td><img src="docs/media/screenshots/screenshot-report.png" width="220"/></td>
-      <td><img src="docs/media/screenshots/screenshot-med.png" width="220"/></td>
+      <td><img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing/main/ui-prototype/screenshots/01-report.png" width="220"/></td>
+      <td><img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing/main/ui-prototype/screenshots/03-medication.png" width="220"/></td>
     </tr>
   </table>
 </p>
 
-> 📷 截图版本：模拟器（2026-03-24）。真机截图待后续补充。
+> 📷 当前为 HTML 原型截图（2026-03-24）。Android App 实机截图待后续补充替换。
 
 ## 项目简介 / Project Overview
 
