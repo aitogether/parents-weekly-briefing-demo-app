@@ -27,9 +27,6 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Create screenshots directory
-        run: mkdir -p screenshots
-
       - name: Install APK and take screenshots
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -40,8 +37,7 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
           disable-animations: true
           script: |
-            WS="$GITHUB_WORKSPACE"
-            mkdir -p "$WS/screenshots"
+            mkdir -p screenshots
 
             # Wait for device fully booted
             adb wait-for-device
@@ -66,26 +62,24 @@ jobs:
             sleep 10
 
             # === HOME PAGE ===
-            adb exec-out screencap -p > "$WS/screenshots/home.png"
+            adb exec-out screencap -p > screenshots/home.png
             echo "✓ Home page captured"
 
             # Dump UI hierarchy to find button coordinates
             adb shell uiautomator dump /sdcard/ui_home.xml
-            adb pull /sdcard/ui_home.xml "$WS/screenshots/ui_home.xml"
+            adb pull /sdcard/ui_home.xml screenshots/ui_home.xml
             echo "=== HOME UI DUMP ==="
-            cat "$WS/screenshots/ui_home.xml"
+            cat screenshots/ui_home.xml
             echo "=== END UI DUMP ==="
 
             # Use Python to parse UI and navigate
-            GITHUB_WORKSPACE="$WS" python3 << 'PYEOF'
+            python3 << 'PYEOF'
             import xml.etree.ElementTree as ET
             import subprocess
             import time
             import re
-            import os
 
-            ws = os.environ.get('GITHUB_WORKSPACE', '.')
-            tree = ET.parse(f'{ws}/screenshots/ui_home.xml')
+            tree = ET.parse('screenshots/ui_home.xml')
             root = tree.getroot()
 
             buttons = []
@@ -115,7 +109,7 @@ jobs:
                     print(f"\n--- Navigating to {name} by clicking ({btn['cx']}, {btn['cy']}) ---")
                     subprocess.run(['adb', 'shell', 'input', 'tap', str(btn['cx']), str(btn['cy'])])
                     time.sleep(5)
-                    with open(f'{ws}/screenshots/{name}.png', 'wb') as f:
+                    with open(f'screenshots/{name}.png', 'wb') as f:
                         result = subprocess.run(['adb', 'exec-out', 'screencap', '-p'], capture_output=True)
                         f.write(result.stdout)
                     size = len(result.stdout)
@@ -131,8 +125,7 @@ jobs:
             PYEOF
 
             echo "=== Final listing ==="
-            ls -la "$WS/screenshots/"
-            echo "Total screenshots: $(ls "$WS/screenshots/"*.png 2>/dev/null | wc -l)"
+            ls -la screenshots/
 
       - name: Upload screenshots as artifacts
         if: always()
