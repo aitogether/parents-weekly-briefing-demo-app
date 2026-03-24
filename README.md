@@ -18,17 +18,19 @@
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>黄灯周报</b></td>
-      <td align="center"><b>用药管理</b></td>
+      <td align="center"><b>周报详情</b></td>
+      <td align="center"><b>用药确认</b></td>
+      <td align="center"><b>回声结果</b></td>
     </tr>
     <tr>
-      <td><img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing/main/ui-prototype/screenshots/01-report.png" width="220"/></td>
-      <td><img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing/main/ui-prototype/screenshots/03-medication.png" width="220"/></td>
+      <td><img src="docs/media/screenshots/phone-02-report.jpg" width="240"/></td>
+      <td><img src="docs/media/screenshots/phone-03-med-confirm.jpg" width="240"/></td>
+      <td><img src="docs/media/screenshots/phone-05-echo.jpg" width="240"/></td>
     </tr>
   </table>
 </p>
 
-> 📷 当前截图为 HTML 原型渲染效果，用于展示设计。Android 实机界面尽量贴近，但可能存在细节差异。
+> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况。
 
 ## 项目简介 / Project Overview
 
