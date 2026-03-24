@@ -3,7 +3,8 @@
 > **状态：2026-03 正在寻找 5–10 个愿意尝试的家庭内测。**
 
 <p align="center">
-  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
+  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/><br/>
+  <em>Launcher icon — 扁平设计，青绿配色</em>
 </p>
 
 <p align="center">
