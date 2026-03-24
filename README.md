@@ -1,5 +1,7 @@
 # Parents Weekly Briefing · Demo App
 
+> **状态：2026-03 正在寻找 5–10 个愿意尝试的家庭内测。**
+
 <p align="center">
   <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
 </p>
@@ -26,7 +28,7 @@
   </table>
 </p>
 
-> 📷 当前为 HTML 原型截图（2026-03-24）。Android App 实机截图待后续补充替换。
+> 📷 当前截图为 HTML 原型渲染效果，用于展示设计。Android 实机界面尽量贴近，但可能存在细节差异。
 
 ## 项目简介 / Project Overview
 
