@@ -2,6 +2,10 @@ name: Screenshot App Pages
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/screenshot.yml'
 
 jobs:
   screenshots:
