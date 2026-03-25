@@ -18,5 +18,5 @@
     <color name="action_yellow">#FEF3C7</color>
     <color name="danger_red">#EF4444</color>
     <!-- 图标背景 -->
-    <color name="ic_launcher_background">#20A080</color>
+    <color name="ic_launcher_background">#e8eef0</color>
 </resources>
