@@ -23,14 +23,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build Release APK
-        run: chmod +x gradlew && ./gradlew assembleRelease
+      - name: Build Debug APK (auto-signed)
+        run: chmod +x gradlew && ./gradlew assembleDebug
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-unsigned
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload APK to GitHub Release
         if: github.event_name == 'push'
@@ -38,5 +38,5 @@ jobs:
         with:
           tag_name: v1
           files: |
-            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/debug/app-debug.apk
           token: ${{ secrets.GITHUB_TOKEN }}
