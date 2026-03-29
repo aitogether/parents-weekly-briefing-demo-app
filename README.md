@@ -48,12 +48,38 @@
 
 ## 安装方式 / Installation
 
+### 方式一：下载 APK（推荐）
+
 1. 从 [GitHub Releases](https://github.com/aitogether/parents-weekly-briefing-demo-app/releases) 下载最新 APK。
 2. 在 Android 8.0+ 设备上，进入 设置 → 安全 → 允许安装来自未知来源的应用。
 3. 安装 APK。
 
 > ⚠️ 本 App 仅用于演示，不联网、不收集任何真实数据。
 > This app is for demo purposes only — it does not connect to the internet or collect any real data.
+
+### 方式二：从源码构建
+
+**前置条件：**
+- Android Studio（推荐 Hedgehog 2023.1+）
+- JDK 17+
+- Android SDK 34
+
+**步骤：**
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/aitogether/parents-weekly-briefing-demo-app.git
+cd parents-weekly-briefing-demo-app
+
+# 2. 用 Android Studio 打开项目
+#    File → Open → 选择项目根目录
+
+# 3. 等待 Gradle Sync 完成
+
+# 4. 连接设备或启动模拟器，点击 ▶ Run
+```
+
+> 预期结果：App 成功安装到设备，显示主页（4 个大按钮入口），所有功能均为本地假数据，无需联网。
 
 ## 演示脚本 / Demo Walkthrough
 
