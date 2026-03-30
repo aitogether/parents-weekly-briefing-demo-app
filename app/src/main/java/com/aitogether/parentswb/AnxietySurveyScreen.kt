@@ -201,6 +201,7 @@ fun AnxietySurveyScreen(onBack: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun QuestionCard(
     question: SurveyQuestion,
