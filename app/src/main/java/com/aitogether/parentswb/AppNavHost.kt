@@ -8,6 +8,9 @@ import androidx.navigation.compose.rememberNavController
 sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Report : Screen("report")
+    object StepChart : Screen("step_chart")
+    object MultiWeekTrend : Screen("multi_week_trend")
+    object AnxietySurvey : Screen("anxiety_survey")
     object MedicationMom : Screen("medication/mom")
     object MedicationDad : Screen("medication/dad")
     object MedicationPlan : Screen("medication/plan")
@@ -22,18 +25,29 @@ fun AppNavHost() {
                 onReportClick = { navController.navigate(Screen.Report.route) },
                 onMomMedClick = { navController.navigate(Screen.MedicationMom.route) },
                 onDadMedClick = { navController.navigate(Screen.MedicationDad.route) },
-                onAddPlanClick = { navController.navigate(Screen.MedicationPlan.route) }
+                onAddPlanClick = { navController.navigate(Screen.MedicationPlan.route) },
+                onStepChartClick = { navController.navigate(Screen.StepChart.route) },
+                onMultiWeekTrendClick = { navController.navigate(Screen.MultiWeekTrend.route) },
+                onAnxietySurveyClick = { navController.navigate(Screen.AnxietySurvey.route) }
             )
         }
         composable(Screen.Report.route) {
             ReportScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.StepChart.route) {
+            StepChartScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.MultiWeekTrend.route) {
+            MultiWeekTrendScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.AnxietySurvey.route) {
+            AnxietySurveyScreen(onBack = { navController.popBackStack() })
         }
         composable(Screen.MedicationMom.route) {
             MedicationScreen(
                 parentId = "mom",
                 title = "妈妈 · 用药确认",
                 medication = "今天的用药：降压药早晚各一片",
-                buttonText = "今天已吃药",
                 showEcho = true,
                 echoText = "最近有点担心，改天好好跟你聊聊。",
                 onBack = { navController.popBackStack() }
@@ -44,7 +58,6 @@ fun AppNavHost() {
                 parentId = "dad",
                 title = "爸爸 · 用药确认",
                 medication = "今天的用药：今天没有特别需要记的药。",
-                buttonText = "状态正常",
                 showEcho = false,
                 echoText = "",
                 onBack = { navController.popBackStack() }

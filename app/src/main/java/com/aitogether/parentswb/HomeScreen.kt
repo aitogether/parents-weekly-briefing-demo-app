@@ -19,7 +19,10 @@ fun HomeScreen(
     onReportClick: () -> Unit,
     onMomMedClick: () -> Unit,
     onDadMedClick: () -> Unit,
-    onAddPlanClick: () -> Unit
+    onAddPlanClick: () -> Unit,
+    onStepChartClick: () -> Unit = {},
+    onMultiWeekTrendClick: () -> Unit = {},
+    onAnxietySurveyClick: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -42,6 +45,31 @@ fun HomeScreen(
         ) {
             Spacer(modifier = Modifier.height(20.dp))
 
+            // 一句话卡片
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = ScheduleYellow),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text(
+                        "妈这周步数比上周少了 15%，用药只有 5 天确认。",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = DarkGray,
+                        lineHeight = 24.sp
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        "💡 建议打个电话问问她最近是不是出门少了。",
+                        fontSize = 14.sp,
+                        color = MediumGray,
+                        lineHeight = 22.sp
+                    )
+                }
+            }
+
             Text(
                 text = "请选择演示场景",
                 fontSize = 18.sp,
@@ -56,6 +84,30 @@ fun HomeScreen(
                 icon = Icons.Filled.Assessment,
                 color = BrandTeal,
                 onClick = onReportClick
+            )
+
+            MenuButton(
+                text = "📊 步数趋势图",
+                description = "7天步数柱状图与趋势分析",
+                icon = Icons.Filled.DirectionsWalk,
+                color = WarmGreen,
+                onClick = onStepChartClick
+            )
+
+            MenuButton(
+                text = "📈 多周趋势",
+                description = "4周灯号时间线对比",
+                icon = Icons.Filled.TrendingUp,
+                color = WarmBlue,
+                onClick = onMultiWeekTrendClick
+            )
+
+            MenuButton(
+                text = "📋 焦虑自查",
+                description = "照顾者心理状态快速自评",
+                icon = Icons.Filled.Psychology,
+                color = Purple600,
+                onClick = onAnxietySurveyClick
             )
 
             MenuButton(
@@ -85,7 +137,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "v1.0 · ParentsWeeklyBriefing",
+                text = "v2.0 · ParentsWeeklyBriefing",
                 fontSize = 12.sp,
                 color = MediumGray
             )

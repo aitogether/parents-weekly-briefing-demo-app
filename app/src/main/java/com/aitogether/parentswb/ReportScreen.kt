@@ -50,6 +50,24 @@ fun ReportScreen(onBack: () -> Unit) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // 0. 一句话卡片
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = ScheduleYellow),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text(
+                        "妈这周有些数据不太理想，建议打个电话聊聊。",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = DarkGray,
+                        lineHeight = 24.sp
+                    )
+                }
+            }
+
             // 1. 顶部状态卡
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -85,7 +103,38 @@ fun ReportScreen(onBack: () -> Unit) {
                 }
             }
 
-            // 2. 事实列表
+            // 2. 行动按钮（并排）
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Button(
+                    onClick = { /* TODO: 拨打电话 */ },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = BrandTeal),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Icon(Icons.Filled.Phone, contentDescription = null, tint = Color.White)
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("给妈打个电话", fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = Color.White)
+                }
+                Button(
+                    onClick = { /* TODO: 发送提醒 */ },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = WarmHighlight),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Icon(Icons.Filled.Medication, contentDescription = null, tint = Color.White)
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("提醒妈吃药", fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = Color.White)
+                }
+            }
+
+            // 3. 事实列表
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -127,7 +176,7 @@ fun ReportScreen(onBack: () -> Unit) {
                 }
             }
 
-            // 3. 行动建议
+            // 4. 行动建议
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -150,7 +199,73 @@ fun ReportScreen(onBack: () -> Unit) {
                 }
             }
 
-            // 4. 回声三选一
+            // 5. 你可能好奇
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text(
+                        "🤔 你可能好奇",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = DarkGray
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    val curiosities = listOf(
+                        "为什么妈周三步数特别低？那天可能下雨了，或者身体不太舒服。",
+                        "爸周六出门那 3,280 步是怎么回事？可能是去菜市场或公园了。",
+                        "降压药漏服 2 天有什么影响？偶尔漏服问题不大，但连续漏服要注意。"
+                    )
+                    curiosities.forEach { item ->
+                        Text(
+                            "• $item",
+                            fontSize = 14.sp,
+                            color = DarkGray,
+                            lineHeight = 22.sp,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                    }
+                }
+            }
+
+            // 6. 话题参考
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = EchoBackground),
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text(
+                        "💬 话题参考",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = DarkGray
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    val topics = listOf(
+                        "\"妈，最近天气不错，有没有出去走走呀？\"",
+                        "\"爸上次说膝盖疼，现在怎么样了？\"",
+                        "\"我看到你周三步数特别少，是不是那天不太舒服？\"",
+                        "\"降压药快吃完了没有？要不要我帮你买？\""
+                    )
+                    topics.forEach { topic ->
+                        Text(
+                            topic,
+                            fontSize = 14.sp,
+                            color = BrandTeal,
+                            lineHeight = 22.sp,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                    }
+                }
+            }
+
+            // 7. 回声三选一
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),

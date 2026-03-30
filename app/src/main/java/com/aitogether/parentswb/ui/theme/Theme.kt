@@ -12,27 +12,27 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = BrandTeal,
+    primary = BrandTealDark,          // v1.1: 主按钮用 BrandTealDark
     primaryContainer = BrandTealLight,
     secondary = BrandMint,
     secondaryContainer = BrandMintLight,
-    tertiary = WarmBlue,
+    tertiary = WarmHighlight,          // v1.1: 暖色点缀替代 WarmBlue
     tertiaryContainer = EchoBackground,
     background = White,
     surface = White,
     onPrimary = White,
     onSecondary = White,
     onTertiary = White,
-    onBackground = DarkGray,
-    onSurface = DarkGray,
-    error = DangerRed,
+    onBackground = DarkGray,           // v1.1: #1F2937
+    onSurface = DarkGray,              // v1.1: #1F2937
+    error = HeartRed,                  // v1.1: 用 HeartRed 替代 DangerRed
     outline = CardBorder
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = BrandTeal,
+    primary = BrandTealDark,
     secondary = BrandMint,
-    tertiary = WarmBlue
+    tertiary = WarmHighlight
 )
 
 @Composable
