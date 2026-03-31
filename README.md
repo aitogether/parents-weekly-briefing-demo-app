@@ -19,19 +19,33 @@
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>周报详情</b></td>
-      <td align="center"><b>用药确认</b></td>
-      <td align="center"><b>回声结果</b></td>
+      <td align="center"><b>首页</b></td>
+      <td align="center"><b>周报概览</b></td>
+      <td align="center"><b>步数趋势</b></td>
+      <td align="center"><b>多周趋势</b></td>
     </tr>
     <tr>
-      <td><img src="docs/media/screenshots/phone-02-report.jpg" width="240"/></td>
-      <td><img src="docs/media/screenshots/phone-03-med-confirm.jpg" width="240"/></td>
-      <td><img src="docs/media/screenshots/phone-05-echo.jpg" width="240"/></td>
+      <td><img src="docs/media/screenshots/01-home.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/02-report.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/03-step-chart.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/04-multi-week-trend.png" width="200"/></td>
+    </tr>
+    <tr>
+      <td align="center"><b>焦虑自查</b></td>
+      <td align="center"><b>妈妈用药</b></td>
+      <td align="center"><b>爸爸用药</b></td>
+      <td align="center"><b>用药计划</b></td>
+    </tr>
+    <tr>
+      <td><img src="docs/media/screenshots/05-anxiety-survey.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/06-medication-mom.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/07-medication-dad.png" width="200"/></td>
+      <td><img src="docs/media/screenshots/08-medication-plan.png" width="200"/></td>
     </tr>
   </table>
 </p>
 
-> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况，也不构成任何医疗建议。
+> 📷 Android 模拟器截图（2026-03-31）。色板 v1.1（BrandTeal #20A080）。所有数据均为演示数据，不代表真实用户情况，也不构成任何医疗建议。
 
 ## 项目简介 / Project Overview
 
