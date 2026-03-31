@@ -46,27 +46,19 @@ go_back() {
 }
 
 # For 1080x2280 (pixel_4 emulator):
-# Top bar ends ~80px, content starts ~180px
-# Each MenuButton is ~120dp = ~140px tall with ~20dp = ~24px gap
-# Button center Y positions (measured from screenshot):
-#   01: 黄灯周报  ~597
-#   02: 步数趋势  ~780
-#   03: 多周趋势  ~963
-#   04: 焦虑自查  ~1146
-#   05: 妈妈用药  ~1329
-#   06: 爸爸用药  ~1512
-#   07: 用药计划  ~1695 (may need scroll)
+# Measured from screenshot:
+#   Status bar ~44px, App bar ~80px, Echo card ~75px, "请选择演示场景" ~35px
+#   Button start y≈245, each button ≈155px + 24px gap
+#   Button centers: 322, 482, 642, 802, 962, 1122, 1282
 
-# Calculate button positions dynamically
-TOP_BAR=80
-CONTENT_START=260
-BUTTON_HEIGHT=140
+CONTENT_TOP=245
+BUTTON_H=155
 BUTTON_GAP=24
 CENTER_X=$((WIDTH / 2))
 
 button_y() {
   local index=$1  # 0-based
-  echo $(( CONTENT_START + BUTTON_HEIGHT / 2 + index * (BUTTON_HEIGHT + BUTTON_GAP) ))
+  echo $(( CONTENT_TOP + BUTTON_H / 2 + index * (BUTTON_H + BUTTON_GAP) ))
 }
 
 # === Step 1: Home ===
@@ -109,11 +101,8 @@ tap_center $(button_y 5)
 capture "07-medication-dad"
 go_back
 
-# === Step 8: 用药计划 (might need scroll) ===
+# === Step 8: 用药计划 ===
 echo "=== 08: MedicationPlan ==="
-# Scroll down first
-adb shell input swipe $CENTER_X 1600 $CENTER_X 600 300
-sleep 1
 tap_center $(button_y 6)
 capture "08-medication-plan"
 go_back
