@@ -8,6 +8,12 @@ adb wait-for-device
 until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do sleep 2; done
 sleep 5
 
+# Get screen size
+SCREEN_SIZE=$(adb shell wm size | grep -oP '\d+x\d+$')
+WIDTH=$(echo $SCREEN_SIZE | cut -dx -f1)
+HEIGHT=$(echo $SCREEN_SIZE | cut -dx -f2)
+echo "Screen size: ${WIDTH}x${HEIGHT}"
+
 # Install APK
 echo "Installing APK..."
 adb install -g app/build/outputs/apk/debug/app-debug.apk
@@ -23,46 +29,15 @@ sleep 10
 # --- Helper: capture screenshot ---
 capture() {
   adb exec-out screencap -p > "screenshots/${1}.png"
-  local sz
-  sz=$(wc -c < "screenshots/${1}.png")
-  echo "Captured: ${1}.png (${sz} bytes)"
+  echo "Captured: ${1}.png ($(wc -c < "screenshots/${1}.png") bytes)"
 }
 
-# --- Helper: dump UI and list all clickable nodes ---
-dump_and_list() {
-  adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
-  adb pull /sdcard/ui.xml screenshots/ui.xml >/dev/null 2>&1
-  python3 scripts/list_buttons.py
-}
-
-# --- Helper: tap button by keyword match ---
-tap_button() {
-  local keyword="$1"
-  local coords
-  coords=$(KEYWORD="$keyword" python3 -c "
-import os, xml.etree.ElementTree as ET, re, sys
-kw = os.environ.get('KEYWORD','')
-tree = ET.parse('screenshots/ui.xml')
-for n in tree.getroot().iter('node'):
-    t = n.get('text','')
-    d = n.get('content-desc','')
-    combined = t + ' ' + d
-    if kw in combined and n.get('clickable','false') == 'true':
-        m = re.match(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]', n.get('bounds',''))
-        if m:
-            x1,y1,x2,y2 = map(int, m.groups())
-            print(f'{(x1+x2)//2} {(y1+y2)//2}')
-            sys.exit(0)
-print('NOT_FOUND')
-")
-  if [ "$coords" = "NOT_FOUND" ] || [ -z "$coords" ]; then
-    echo "Button '${keyword}' not found"
-    return 1
-  fi
-  echo "Tapping '${keyword}' at ${coords}"
-  adb shell input tap ${coords}
-  sleep 4
-  return 0
+# --- Helper: tap at center of screen, specific Y offset ---
+tap_center() {
+  local y_offset=$1
+  local cx=$((WIDTH / 2))
+  adb shell input tap $cx $y_offset
+  sleep 3
 }
 
 go_back() {
@@ -70,52 +45,78 @@ go_back() {
   sleep 3
 }
 
-# === Step 1: Try to dismiss privacy dialog ===
-echo "=== Dismiss privacy dialog ==="
-adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
-adb pull /sdcard/ui.xml screenshots/ui.xml >/dev/null 2>&1
-# Dump all clickable elements for debugging
-echo "--- All clickable elements on initial screen ---"
-dump_and_list
-echo "---"
+# For 1080x2280 (pixel_4 emulator):
+# Top bar ends ~80px, content starts ~180px
+# Each MenuButton is ~120dp = ~140px tall with ~20dp = ~24px gap
+# Button center Y positions (measured from screenshot):
+#   01: 黄灯周报  ~597
+#   02: 步数趋势  ~780
+#   03: 多周趋势  ~963
+#   04: 焦虑自查  ~1146
+#   05: 妈妈用药  ~1329
+#   06: 爸爸用药  ~1512
+#   07: 用药计划  ~1695 (may need scroll)
 
-for kw in "我知道了" "同意" "允许" "确认"; do
-  tap_button "$kw" && break
-done || true
-sleep 3
+# Calculate button positions dynamically
+TOP_BAR=80
+CONTENT_START=260
+BUTTON_HEIGHT=140
+BUTTON_GAP=24
+CENTER_X=$((WIDTH / 2))
 
-# === Step 2: Dump UI again after dialog dismiss ===
-adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
-adb pull /sdcard/ui.xml screenshots/ui.xml >/dev/null 2>&1
-echo "--- All clickable elements after dialog ---"
-dump_and_list
-echo "---"
+button_y() {
+  local index=$1  # 0-based
+  echo $(( CONTENT_START + BUTTON_HEIGHT / 2 + index * (BUTTON_HEIGHT + BUTTON_GAP) ))
+}
 
-# === Step 3: Home ===
+# === Step 1: Home ===
 echo "=== 01: Home ==="
 capture "01-home"
 
-# === Step 4: Navigate to each page ===
-# Keywords must match substrings in the button text
-PAGES=(
-  "黄灯周报|02-report"
-  "步数趋势|03-step-chart"
-  "多周趋势|04-multi-week-trend"
-  "焦虑自查|05-anxiety-survey"
-  "妈妈|06-medication-mom"
-  "爸爸|07-medication-dad"
-  "用药计划|08-medication-plan"
-)
+# === Step 2: 黄灯周报 ===
+echo "=== 02: Report ==="
+tap_center $(button_y 0)
+capture "02-report"
+go_back
 
-for entry in "${PAGES[@]}"; do
-  keyword="${entry%%|*}"
-  filename="${entry##*|}"
-  echo "=== ${filename} ==="
-  if tap_button "$keyword"; then
-    capture "$filename"
-    go_back
-  fi
-done
+# === Step 3: 步数趋势 ===
+echo "=== 03: StepChart ==="
+tap_center $(button_y 1)
+capture "03-step-chart"
+go_back
+
+# === Step 4: 多周趋势 ===
+echo "=== 04: MultiWeekTrend ==="
+tap_center $(button_y 2)
+capture "04-multi-week-trend"
+go_back
+
+# === Step 5: 焦虑自查 ===
+echo "=== 05: AnxietySurvey ==="
+tap_center $(button_y 3)
+capture "05-anxiety-survey"
+go_back
+
+# === Step 6: 妈妈用药 ===
+echo "=== 06: MedicationMom ==="
+tap_center $(button_y 4)
+capture "06-medication-mom"
+go_back
+
+# === Step 7: 爸爸用药 ===
+echo "=== 07: MedicationDad ==="
+tap_center $(button_y 5)
+capture "07-medication-dad"
+go_back
+
+# === Step 8: 用药计划 (might need scroll) ===
+echo "=== 08: MedicationPlan ==="
+# Scroll down first
+adb shell input swipe $CENTER_X 1600 $CENTER_X 600 300
+sleep 1
+tap_center $(button_y 6)
+capture "08-medication-plan"
+go_back
 
 echo ""
 echo "=== All screenshots captured ==="
