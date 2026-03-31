@@ -40,7 +40,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Purple600,
+                    containerColor = BrandTealDark,
                     titleContentColor = Color.White,
                     navigationIconContentColor = Color.White
                 )
@@ -50,7 +50,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(LightGray)
+                .background(EchoBackground)
                 .padding(padding)
                 .padding(horizontal = 20.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -70,7 +70,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                     Button(
                         onClick = { selectedParent = parent },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = if (selectedParent == parent) Purple600 else CardBorder
+                            containerColor = if (selectedParent == parent) BrandTealDark else CardBorder
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
@@ -88,7 +88,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                 value = medicationName,
                 onValueChange = { medicationName = it },
                 label = { Text("药名") },
-                leadingIcon = { Icon(Icons.Filled.Medication, contentDescription = null, tint = Purple600) },
+                leadingIcon = { Icon(Icons.Filled.Medication, contentDescription = null, tint = BrandTealDark) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
             )
@@ -100,7 +100,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                     Button(
                         onClick = { frequency = freq },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = if (frequency == freq) Purple600 else CardBorder
+                            containerColor = if (frequency == freq) BrandTealDark else CardBorder
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
@@ -132,7 +132,7 @@ fun MedicationPlanScreen(onBack: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Purple600),
+                colors = ButtonDefaults.buttonColors(containerColor = BrandTealDark),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Icon(Icons.Filled.NoteAdd, contentDescription = null, tint = Color.White)
@@ -175,7 +175,7 @@ private fun TimeChip(label: String, selected: Boolean, onToggle: (Boolean) -> Un
     Button(
         onClick = { onToggle(!selected) },
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (selected) Purple600 else CardBorder
+            containerColor = if (selected) BrandTealDark else CardBorder
         ),
         shape = RoundedCornerShape(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
@@ -205,7 +205,7 @@ private fun PlanPreview(parent: String, med: String, morning: Boolean, noon: Boo
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = Purple600, modifier = Modifier.size(20.dp))
+                Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = BrandTealDark, modifier = Modifier.size(20.dp))
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "$parent · $med · ${times.joinToString("、")}用药计划预览",
@@ -232,7 +232,7 @@ private fun PlanPreview(parent: String, med: String, morning: Boolean, noon: Boo
                                 Text(
                                     "$time · $med",
                                     fontSize = 12.sp,
-                                    color = WarmBlue,
+                                    color = BrandMint,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }

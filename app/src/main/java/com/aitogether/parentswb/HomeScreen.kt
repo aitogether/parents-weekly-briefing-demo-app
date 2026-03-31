@@ -90,7 +90,7 @@ fun HomeScreen(
                 text = "📊 步数趋势图",
                 description = "7天步数柱状图与趋势分析",
                 icon = Icons.Filled.DirectionsWalk,
-                color = WarmGreen,
+                color = BrandTeal,
                 onClick = onStepChartClick
             )
 
@@ -98,7 +98,7 @@ fun HomeScreen(
                 text = "📈 多周趋势",
                 description = "4周灯号时间线对比",
                 icon = Icons.Filled.TrendingUp,
-                color = WarmBlue,
+                color = BrandMint,
                 onClick = onMultiWeekTrendClick
             )
 
@@ -106,7 +106,7 @@ fun HomeScreen(
                 text = "📋 焦虑自查",
                 description = "照顾者心理状态快速自评",
                 icon = Icons.Filled.Psychology,
-                color = Purple600,
+                color = BrandTealDark,
                 onClick = onAnxietySurveyClick
             )
 
@@ -114,7 +114,7 @@ fun HomeScreen(
                 text = "💊 妈妈 · 用药确认",
                 description = "看到子女的一句话",
                 icon = Icons.Filled.Favorite,
-                color = WarmGreen,
+                color = BrandTeal,
                 onClick = onMomMedClick
             )
 
@@ -122,7 +122,7 @@ fun HomeScreen(
                 text = "💚 爸爸 · 用药确认",
                 description = "暂未收到回声",
                 icon = Icons.Filled.MedicalServices,
-                color = WarmBlue,
+                color = BrandMint,
                 onClick = onDadMedClick
             )
 
@@ -130,7 +130,7 @@ fun HomeScreen(
                 text = "📝 子女端 · 添加用药计划",
                 description = "演示为父母设定用药计划",
                 icon = Icons.Filled.NoteAdd,
-                color = Purple600,
+                color = BrandTealDark,
                 onClick = onAddPlanClick
             )
 

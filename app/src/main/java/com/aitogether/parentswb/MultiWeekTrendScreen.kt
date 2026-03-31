@@ -38,7 +38,7 @@ fun MultiWeekTrendScreen(onBack: () -> Unit) {
             val step = TrafficLight.entries.toTypedArray()[Random.nextInt(3)]
             val med = TrafficLight.entries.toTypedArray()[Random.nextInt(3)]
             val baseColor = when (step) {
-                TrafficLight.GREEN -> WarmGreen
+                TrafficLight.GREEN -> BrandTeal
                 TrafficLight.YELLOW -> WarmHighlight
                 TrafficLight.RED -> ScheduleRed
             }
@@ -55,7 +55,7 @@ fun MultiWeekTrendScreen(onBack: () -> Unit) {
     }
 
     fun lightColor(l: TrafficLight) = when (l) {
-        TrafficLight.GREEN -> WarmGreen
+        TrafficLight.GREEN -> BrandTeal
         TrafficLight.YELLOW -> WarmHighlight
         TrafficLight.RED -> ScheduleRed
     }
@@ -242,7 +242,7 @@ fun MultiWeekTrendScreen(onBack: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        StatChip(WarmGreen, "🟢 绿灯 $stepGreenCount 周")
+                        StatChip(BrandTeal, "🟢 绿灯 $stepGreenCount 周")
                         StatChip(WarmHighlight, "🟡 黄灯 $stepYellowCount 周")
                         StatChip(ScheduleRed, "🔴 红灯 $stepRedCount 周")
                     }
@@ -254,7 +254,7 @@ fun MultiWeekTrendScreen(onBack: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        StatChip(WarmGreen, "🟢 绿灯 $medGreenCount 周")
+                        StatChip(BrandTeal, "🟢 绿灯 $medGreenCount 周")
                         StatChip(WarmHighlight, "🟡 黄灯 $medYellowCount 周")
                         StatChip(ScheduleRed, "🔴 红灯 $medRedCount 周")
                     }

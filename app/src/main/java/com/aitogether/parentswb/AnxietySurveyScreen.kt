@@ -34,7 +34,7 @@ private val surveyQuestions = listOf(
         id = 1,
         text = "过去 2 周，对父母健康的担心程度？",
         options = listOf(
-            SurveyOption(0, "从不", WarmGreen),
+            SurveyOption(0, "从不", BrandTeal),
             SurveyOption(1, "有时", WarmHighlight),
             SurveyOption(2, "经常", Color(0xFFE67E22)),
             SurveyOption(3, "总是", ScheduleRed)
@@ -44,7 +44,7 @@ private val surveyQuestions = listOf(
         id = 2,
         text = "过去 2 周，是否因为想父母健康问题失眠？",
         options = listOf(
-            SurveyOption(0, "从不", WarmGreen),
+            SurveyOption(0, "从不", BrandTeal),
             SurveyOption(1, "有时", WarmHighlight),
             SurveyOption(2, "经常", Color(0xFFE67E22)),
             SurveyOption(3, "总是", ScheduleRed)
@@ -54,7 +54,7 @@ private val surveyQuestions = listOf(
         id = 3,
         text = "过去 2 周，是否感到无法控制父母的健康状况？",
         options = listOf(
-            SurveyOption(0, "从不", WarmGreen),
+            SurveyOption(0, "从不", BrandTeal),
             SurveyOption(1, "有时", WarmHighlight),
             SurveyOption(2, "经常", Color(0xFFE67E22)),
             SurveyOption(3, "总是", ScheduleRed)
@@ -77,7 +77,7 @@ fun AnxietySurveyScreen(onBack: () -> Unit) {
     }
 
     val feedbackColor = when {
-        totalScore <= 3 -> WarmGreen
+        totalScore <= 3 -> BrandTeal
         totalScore <= 6 -> WarmHighlight
         else -> ScheduleRed
     }

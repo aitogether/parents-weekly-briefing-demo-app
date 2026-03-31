@@ -28,7 +28,7 @@ data class StepData(
 ) {
     val color: Color
         get() = when {
-            steps >= 3000 -> WarmGreen
+            steps >= 3000 -> BrandTeal
             steps >= 1000 -> WarmHighlight
             else -> ScheduleRed
         }
@@ -149,7 +149,7 @@ fun StepChartScreen(onBack: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        LegendItem(color = WarmGreen, label = "≥3000 正常")
+                        LegendItem(color = BrandTeal, label = "≥3000 正常")
                         LegendItem(color = WarmHighlight, label = "1000-3000 留意")
                         LegendItem(color = ScheduleRed, label = "<1000 需关注")
                     }

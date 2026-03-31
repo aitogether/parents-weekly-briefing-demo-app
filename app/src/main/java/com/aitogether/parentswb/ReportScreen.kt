@@ -155,7 +155,7 @@ fun ReportScreen(onBack: () -> Unit) {
                             "妈本周 7 天里有 2 天没按时吃降压药（完成率 71%）。"),
                         Triple(Icons.Filled.DirectionsWalk, BrandTeal,
                             "妈周三步数只有 890 步，比平时低很多。"),
-                        Triple(Icons.Filled.DirectionsWalk, WarmBlue,
+                        Triple(Icons.Filled.DirectionsWalk, BrandMint,
                             "爸有 5 天步数低于 800 步，周六 3,280 步出门了一次。")
                     )
                     facts.forEach { (icon, iconColor, fact) ->
@@ -180,7 +180,7 @@ fun ReportScreen(onBack: () -> Unit) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = ActionYellow),
+                colors = CardDefaults.cardColors(containerColor = WarmHighlight),
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
@@ -269,7 +269,7 @@ fun ReportScreen(onBack: () -> Unit) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = LightGray),
+                colors = CardDefaults.cardColors(containerColor = EchoBackground),
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(

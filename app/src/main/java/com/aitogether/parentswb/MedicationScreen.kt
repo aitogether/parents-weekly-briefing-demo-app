@@ -32,7 +32,8 @@ fun MedicationScreen(
     var oneTapConfirmed by remember { mutableStateOf(false) }
     var medStatus by remember { mutableStateOf<String?>(null) } // "taken" or "not_yet"
     var showMedSheet by remember { mutableStateOf(false) }
-    val topBarColor = if (parentId == "mom") WarmGreen else WarmBlue
+    val topBarColor = if (parentId == "mom") BrandTeal else BrandMint
+    val buttonColor = if (oneTapConfirmed) BrandTeal.copy(alpha = 0.6f) else BrandTeal
 
     Scaffold(
         topBar = {
@@ -103,7 +104,7 @@ fun MedicationScreen(
                         Icon(
                             Icons.Default.CheckCircle,
                             contentDescription = null,
-                            tint = WarmGreen,
+                            tint = BrandTeal,
                             modifier = Modifier.size(32.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))
@@ -168,7 +169,7 @@ fun MedicationScreen(
                             "💬 来自家里人的一句话",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = WarmBlue
+                            color = BrandMint
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -230,7 +231,7 @@ fun MedicationScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = WarmGreen),
+                    colors = ButtonDefaults.buttonColors(containerColor = BrandTeal),
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     Icon(Icons.Default.CheckCircle, contentDescription = null, tint = White)
