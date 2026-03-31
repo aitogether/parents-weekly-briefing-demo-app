@@ -2,10 +2,6 @@ name: Screenshot App Pages
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/screenshot.yml'
 
 jobs:
   screenshots:
@@ -15,11 +11,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download APK from Release
-        run: |
-          curl -L -o app.apk \
-            "https://github.com/aitogether/parents-weekly-briefing-demo-app/releases/download/v1/parents-weekly-briefing-demo-v1.apk"
-          ls -la app.apk
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build APK
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Enable KVM
         run: |
@@ -27,7 +29,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Install APK and take screenshots
+      - name: Boot emulator & capture all screens
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
@@ -36,13 +38,135 @@ jobs:
           force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
           disable-animations: true
+          profile: pixel_4
           script: |
-            mkdir -p screenshots && adb wait-for-device && until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do sleep 2; done && sleep 10 && adb shell input keyevent 82 && sleep 2 && adb install -g app.apk && adb shell monkey -p com.aitogether.parentswb -c android.intent.category.LAUNCHER 1 && sleep 10 && adb exec-out screencap -p > screenshots/home.png && adb shell uiautomator dump /sdcard/ui.xml && adb pull /sdcard/ui.xml screenshots/ui.xml && python3 scripts/capture_screenshots.py && ls -la screenshots/
+            set -e
+            mkdir -p screenshots
 
-      - name: Upload screenshots as artifacts
+            # Wait for boot
+            adb wait-for-device
+            until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do sleep 2; done
+            sleep 5
+
+            # Set high-res display
+            adb shell wm size 1080x2400
+            adb shell wm density 420
+
+            # Install APK
+            echo "Installing APK..."
+            adb install -g app/build/outputs/apk/debug/app-debug.apk
+
+            # Dismiss system dialogs
+            adb shell input keyevent 82
+            sleep 1
+
+            # Launch app
+            adb shell monkey -p com.aitogether.parentswb -c android.intent.category.LAUNCHER 1
+            sleep 8
+
+            # --- Helper functions ---
+            capture() {
+              adb exec-out screencap -p > "screenshots/$1.png"
+              echo "✓ $1.png ($(wc -c < screenshots/$1.png) bytes)"
+            }
+
+            dump_ui() {
+              adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+              adb pull /sdcard/ui.xml screenshots/ui.xml >/dev/null 2>&1
+            }
+
+            # Find button center by text keyword, output "cx cy"
+            find_button() {
+              dump_ui
+              python3 -c "
+            import xml.etree.ElementTree as ET, re, sys
+            kw = '$1'
+            tree = ET.parse('screenshots/ui.xml')
+            for n in tree.getroot().iter('node'):
+                t = n.get('text','') + n.get('content-desc','')
+                if kw in t and n.get('clickable','false') == 'true':
+                    m = re.match(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]', n.get('bounds',''))
+                    if m:
+                        x1,y1,x2,y2 = map(int, m.groups())
+                        print(f'{(x1+x2)//2} {(y1+y2)//2}')
+                        sys.exit(0)
+            sys.exit(1)
+              " 2>/dev/null
+            }
+
+            click() {
+              local coords=$(find_button "$1")
+              if [ -n "$coords" ]; then
+                echo "→ Clicking '$1' at $coords"
+                adb shell input tap $coords
+                sleep 4
+                return 0
+              else
+                echo "✗ Button '$1' not found"
+                return 1
+              fi
+            }
+
+            go_back() {
+              adb shell input keyevent KEYCODE_BACK
+              sleep 3
+            }
+
+            # === Step 1: Dismiss privacy dialog ===
+            echo "=== Dismiss privacy dialog ==="
+            dump_ui
+            for kw in "我知道了" "同意" "允许" "确认"; do
+              click "$kw" && break
+            done || true
+            sleep 3
+
+            # === Step 2: Home ===
+            echo "=== 01: Home ==="
+            capture "01-home"
+
+            # === Step 3: 周报概览 ===
+            echo "=== 02: Report ==="
+            click "周报" && capture "02-report"
+            go_back
+
+            # === Step 4: 步数趋势图 ===
+            echo "=== 03: StepChart ==="
+            click "步数" && capture "03-step-chart"
+            go_back
+
+            # === Step 5: 多周趋势 ===
+            echo "=== 04: MultiWeekTrend ==="
+            click "多周" && capture "04-multi-week-trend"
+            go_back
+
+            # === Step 6: 焦虑自查 ===
+            echo "=== 05: AnxietySurvey ==="
+            click "焦虑" && capture "05-anxiety-survey"
+            go_back
+
+            # === Step 7: 妈妈用药 ===
+            echo "=== 06: MedicationMom ==="
+            click "妈妈" && capture "06-medication-mom"
+            go_back
+
+            # === Step 8: 爸爸用药 ===
+            echo "=== 07: MedicationDad ==="
+            click "爸爸" && capture "07-medication-dad"
+            go_back
+
+            # === Step 9: 用药计划 ===
+            echo "=== 08: MedicationPlan ==="
+            click "用药计划" && capture "08-medication-plan"
+            go_back
+
+            echo ""
+            echo "=== All screenshots captured ==="
+            ls -lh screenshots/*.png
+
+      - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: app-screenshots
-          path: screenshots/
+          path: screenshots/*.png
           retention-days: 30
